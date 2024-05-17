@@ -11,7 +11,7 @@ export async function POST(request) {
     const newUser = await User.addUser(body);
 
     return NextResponse.json({
-      message: "User registered successfully",
+      message: "User berhasil terdaftar",
       email,
       mobile
     }, { status: 201 });
@@ -19,14 +19,14 @@ export async function POST(request) {
     console.log(error);
 
     if (error instanceof ZodError) {
-      const err = error.issues[0].path + ' ' + error.issues[0].message;
+      const err = error.issues[0].message;
 
       return NextResponse.json({
         error: err,
       }, { status: 400 });
     }
 
-    if (error.message === 'Email already exists' || error.message === 'Mobile number already exists') {
+    if (error.message === 'Email sudah terdaftar' || error.message === 'No Handphone sudah terdaftar') {
       return NextResponse.json({
         error: error.message,
       }, { status: 409 });
