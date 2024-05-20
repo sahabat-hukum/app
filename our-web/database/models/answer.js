@@ -6,10 +6,13 @@ export default class Answer {
     return database.collection("answers");
   }
 
-  static async createAnswer(_id) {
+  static async createAnswer(answerInput) {
+    const { userId, postId, content } = answerInput;
     await this.collection().insertOne({
-      postId: ObjectId(String(_id)),
-      answers: [],
+      userId: ObjectId(String(userId)),
+      postId: ObjectId(String(postId)),
+      content: content,
+      createdAt: new Date(),
     });
   }
 }
