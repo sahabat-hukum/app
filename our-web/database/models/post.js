@@ -1,11 +1,10 @@
 import { database } from "../config";
 import { z } from "zod";
-import Answer from "./answer";
 
 const postSchema = z.object({
-  userId: z.string().nonempty("Nama tidak boleh kosong"),
-  title: z.string().nonempty("Nama tidak boleh kosong"),
-  content: z.string().nonempty("Nama tidak boleh kosong"),
+  userId: z.string().nonempty("userId tidak boleh kosong"),
+  title: z.string().nonempty("Title tidak boleh kosong"),
+  content: z.string().nonempty("Content tidak boleh kosong"),
 });
 
 function slugify(string) {
@@ -25,6 +24,11 @@ export default class Post {
     return database.collection("posts");
   }
 
+  static async getIdBySlug(slug) {
+    const post = await this.collection().findOne({ slug });
+    return post._id;
+  }
+
   static async createPost(postInput) {
     const postValidation = postSchema.safeParse(postInput);
 
@@ -32,12 +36,11 @@ export default class Post {
       throw postValidation.error;
     }
 
+    postInput.vote = 0;
     postInput.slug = slugify(postInput.title);
     postInput.createdAt = new Date();
 
     const post = await this.collection().insertOne(postInput);
-
-    await Answer.createAnswer(post.insertedId);
 
     return {
       _id: post.insertedId,
