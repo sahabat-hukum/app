@@ -1,12 +1,24 @@
 import { database } from "../config";
 import { z } from "zod";
-import PostDetail from "./postDetail";
+import Answer from "./answer";
 
 const postSchema = z.object({
   userId: z.string().nonempty("Nama tidak boleh kosong"),
   title: z.string().nonempty("Nama tidak boleh kosong"),
   content: z.string().nonempty("Nama tidak boleh kosong"),
 });
+
+function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
 
 export default class Post {
   static collection() {
@@ -20,10 +32,12 @@ export default class Post {
       throw postValidation.error;
     }
 
-    const detailId = PostDetail.createPostDetail();
-    postInput.detailId = detailId;
+    postInput.slug = slugify(postInput.title);
+    postInput.createdAt = new Date();
 
     const post = await this.collection().insertOne(postInput);
+
+    await Answer.createAnswer(post.insertedId);
 
     return {
       _id: post.insertedId,
