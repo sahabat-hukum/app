@@ -15,4 +15,8 @@ export default class Answer {
       createdAt: new Date(),
     });
   }
+
+  static async deleteAnswer(id) {
+    await this.collection().deleteOne({ _id: ObjectId(String(id)) });
+  }
 }
