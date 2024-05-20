@@ -1,5 +1,5 @@
 const { z } = require("zod")
-const database = require("../config/index")
+const { database } = require("../config/index")
 const advocateCollection = database.collection('advocates')
 
 export const registerAdvocateSchema = z.object({
@@ -47,6 +47,6 @@ export default class Advocate {
     }
 
     static async getAdvocateById(_id) {
-        return await advocateCollection.findOne({_id: ObjectId(_id) })
+        return await advocateCollection.findOne({ _id: ObjectId(_id) })
     }
 }

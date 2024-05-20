@@ -1,5 +1,5 @@
 import database from "../../../../database/config/index"
-import { getAdvocates } from "../../../../database/models/advocate"
+import Advocate from "../../../../database/models/advocate"
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -16,7 +16,7 @@ const inputValidation = z.object({
 
 export async function GET() {
     try {
-        const data = await getAdvocates()
+        const data = await Advocate.getAdvocates()
         return NextResponse.json(
             data
         )
