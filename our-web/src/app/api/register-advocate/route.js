@@ -1,20 +1,19 @@
 const { NextResponse } = require("next/server");
 const { ZodError } = require("zod");
-const User = require("../../../../database/models/user").default;
+const Advocate = require("../../../../database/models/advocate").default;
 
 export async function POST(request) {
   try {
     const body = await request.json();
 
-    const { email, mobile } = body;
+    const { NIA } = body;
 
-    const newUser = await User.addUser(body);
+    // const newUser = await Advocate.addAdvocate(body);
 
     return NextResponse.json(
       {
-        message: "User berhasil terdaftar",
-        email,
-        mobile,
+        message: "Data kamu sudah berhasil terkirim. Tunggu konfirmasi selanjutnya ya",
+        NIA
       },
       { status: 201 }
     );
@@ -33,8 +32,7 @@ export async function POST(request) {
     }
 
     if (
-      error.message === "Email sudah terdaftar" ||
-      error.message === "No Handphone sudah terdaftar"
+      error.message === "NIA sudah terdaftar"
     ) {
       return NextResponse.json(
         {
