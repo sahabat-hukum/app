@@ -1,169 +1,33 @@
 "use client";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const page = ({item}) => {
-  const advokat = [
-    {
-      Id: "000000090999",
-      Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-      Kota: "Malang",
-      Pengalaman: "1 Tahun",
-      Pendidikan: "Universitas Muhammadiyah Malang",
-      Kategory: [
-        "Pidana",
-        "Perdata",
-        "Pertanahan",
-        "Perkawinan",
-        "Ketenagakerjaan",
-      ],
-      Tentang:
-        "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-      LinkFoto:
-        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355/",
-    },
-    {
-      Id: "000000090999",
-      Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-      Kota: "Malang",
-      Pengalaman: "1 Tahun",
-      Pendidikan: "Universitas Muhammadiyah Malang",
-      Kategory: [
-        "Pidana",
-        "Perdata",
-        "Pertanahan",
-        "Perkawinan ",
-        "Ketenagakerjaan",
-      ],
-      Tentang:
-        "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-      LinkFoto:
-        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-    },
-    {
-      Id: "000000090999",
-      Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-      Kota: "Malang",
-      Pengalaman: "1 Tahun",
-      Pendidikan: "Universitas Muhammadiyah Malang",
-      Kategory: [
-        "Pidana",
-        "Perdata",
-        "Pertanahan",
-        "Perkawinan",
-        "Ketenagakerjaan",
-      ],
-      Tentang:
-        "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-      LinkFoto:
-        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-    },
-    {
-      Id: "000000090999",
-      Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-      Kota: "Malang",
-      Pengalaman: "1 Tahun",
-      Pendidikan: "Universitas Muhammadiyah Malang",
-      Kategory: [
-        "Pidana",
-        "Perdata",
-        "Pertanahan",
-        "Perkawinan",
-        "Ketenagakerjaan",
-      ],
-      Tentang:
-        "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-      LinkFoto:
-        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-    }, {
-        Id: "000000090999",
-        Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-        Kota: "Malang",
-        Pengalaman: "1 Tahun",
-        Pendidikan: "Universitas Muhammadiyah Malang",
-        Kategory: [
-          "Pidana",
-          "Perdata",
-          "Pertanahan",
-          "Perkawinan",
-          "Ketenagakerjaan",
-        ],
-        Tentang:
-          "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-        LinkFoto:
-          "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-      }, {
-        Id: "000000090999",
-        Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-        Kota: "Malang",
-        Pengalaman: "1 Tahun",
-        Pendidikan: "Universitas Muhammadiyah Malang",
-        Kategory: [
-          "Pidana",
-          "Perdata",
-          "Pertanahan",
-          "Perkawinan",
-          "Ketenagakerjaan",
-        ],
-        Tentang:
-          "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-        LinkFoto:
-          "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-      }, {
-        Id: "000000090999",
-        Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-        Kota: "Malang",
-        Pengalaman: "1 Tahun",
-        Pendidikan: "Universitas Muhammadiyah Malang",
-        Kategory: [
-          "Pidana",
-          "Perdata",
-          "Pertanahan",
-          "Perkawinan",
-          "Ketenagakerjaan",
-        ],
-        Tentang:
-          "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-        LinkFoto:
-          "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-      }, {
-        Id: "000000090999",
-        Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-        Kota: "Malang",
-        Pengalaman: "1 Tahun",
-        Pendidikan: "Universitas Muhammadiyah Malang",
-        Kategory: [
-          "Pidana",
-          "Perdata",
-          "Pertanahan",
-          "Perkawinan",
-          "Ketenagakerjaan",
-        ],
-        Tentang:
-          "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-        LinkFoto:
-          "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-      }, {
-        Id: "000000090999",
-        Nama: "Raden Destayoma Anugrah Putra Armanda, S.H.",
-        Kota: "Malang",
-        Pengalaman: "1 Tahun",
-        Pendidikan: "Universitas Muhammadiyah Malang",
-        Kategory: [
-          "Pidana",
-          "Perdata",
-          "Pertanahan",
-          "Perkawinan",
-          "Ketenagakerjaan",
-        ],
-        Tentang:
-          "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
-        LinkFoto:
-          "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
-      },
-  ];
+const page = ({ item }) => {
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_BASE_URL + `/api/advocates`,
+          {
+            method: "GET",
+            cache: "no-store",
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const { data } = await res.json();
+        console.log(data);
+
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   return (
     <>
       <div className="pt-20">
@@ -196,55 +60,54 @@ const page = ({item}) => {
 
         <div className=" h-screen w-full mt-10  justify-center flex ">
           <div className=" ">
-            {advokat.map((item,index) => {
+            {data.map((item, index) => {
               return (
                 <>
-             <Link href={`/advokat/${item.Id}`}>
+                  <Link href={`/advokat/${item.Id}`}>
                     <div key={index}>
                       <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
                         <div>
                           <img
                             className="w-24 rounded-md "
-                            src={item.LinkFoto}
+                            src={item.imgUrl}
                             alt=""
                           />
                         </div>
 
                         <div>
-                          <p className="font-bold text-md">{item.Nama}</p>
+                          <p className="font-bold text-md">{item.name}</p>
                           <div className="flex gap-4 mt-2 ">
-                            <p>{item.Kota}</p>I
-                            <p>Pengalaman {item.Pengalaman}</p>
+                            <p>{item.city}</p>I
+                            <p>Pengalaman {item.experience}</p>
                           </div>
                           <div className="flex gap-2 text-sm font-light mt-5">
-                            {item.Kategory.map((category, index) => {
-                              return (
-                                <>
-                                <div key={index}>
-                                  <p
-                                    className=" bg-slate-300 px-2 py-1 rounded-sm"
-                                  
-                                  >
-                                    {category}
-                                  </p>
-                                  </div>
-                                </>
-                              );
-                            })}
+                            {item.category
+                              .split(", ", 3)
+                              .map((category, index) => {
+                                return (
+                                  <>
+                                    <div key={index}>
+                                      <p className=" bg-slate-300 px-2 py-1 rounded-sm">
+                                        {category}
+                                      </p>
+                                    </div>
+                                  </>
+                                );
+                              })}
                           </div>
                           <div className="mt-5 flex">
                             <p className="font-bold">Pendidikan :</p>
-                            <p>{item.Pendidikan}</p>
+                            <p>{item.education}</p>
                           </div>
                         </div>
                       </div>
-                      <div className=" bg-blue-100 w-full h-16 py-2 text-end px-4">                        
+                      <div className=" bg-blue-100 w-full h-16 py-2 text-end px-4">
                         <button className="bg-blue-800 rounded-md  py-2 text-white px-4 hover:bg-blue-950  ">
                           Konsultasikan
                         </button>
                       </div>
-                    </div> 
-                    </Link>              
+                    </div>
+                  </Link>
                 </>
               );
             })}
