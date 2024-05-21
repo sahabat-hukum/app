@@ -1,9 +1,15 @@
-import ChatBox from "@/component/chatbox";
+"use client"
+import About from '@/components/about'
+import Navbar from '@/components/navbar'
+import React from 'react'
 
-export default function Home() {
+const page = () => {
+
   return (
-   <>
-   <ChatBox />
-   </>
-  );
+    <div className='bg-white'>
+      <Navbar/>  
+      <About/>     
+    </div>
+  )
 }
+export default page

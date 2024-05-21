@@ -12,8 +12,9 @@ export async function POST(request) {
 
     return NextResponse.json(
       {
-        message: "Data kamu sudah berhasil terkirim. Tunggu konfirmasi selanjutnya ya",
-        NIA
+        message:
+          "Data kamu sudah berhasil terkirim. Tunggu konfirmasi selanjutnya ya",
+        NIA,
       },
       { status: 201 }
     );
@@ -31,9 +32,7 @@ export async function POST(request) {
       );
     }
 
-    if (
-      error.message === "NIA sudah terdaftar"
-    ) {
+    if (error.message === "NIA sudah terdaftar") {
       return NextResponse.json(
         {
           error: error.message,
