@@ -17,7 +17,7 @@ const page = async ({ params }) => {
             <div>
               <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
                 <div>
-                  <img
+                  <img 
                     style={{ width: 800 }}
                     className=" rounded-md "
                     src={advokat.imgUrl}
