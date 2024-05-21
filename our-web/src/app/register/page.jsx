@@ -67,7 +67,7 @@ const page = () => {
                 </label>
                 <input
                   name="password"
-                  type="text"
+                  type="password"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 />
                 <button
