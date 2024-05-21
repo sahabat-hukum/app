@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { database } from "../config";
 
 export default class Advocate {
@@ -37,6 +38,8 @@ export default class Advocate {
   }
 
   static async getAdvocateById(_id) {
-    return await advocateCollection.findOne({ _id: ObjectId(_id) });
+    return await database
+      .collection("users")
+      .findOne({ _id: new ObjectId(String(_id)) });
   }
 }

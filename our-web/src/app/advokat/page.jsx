@@ -33,16 +33,16 @@ const page = ({ item }) => {
       <div className="pt-20">
         <Navbar />
       </div>
- 
- <div className="fixed  bg-white ">
-      <div className="mt-24 ml-96 pl-14  text-center">
-        <h1 className="font-bold text-4xl text-blue-950 mr-32 ">
-          Temukan Advokat Pilihanmu
-        </h1>
-      </div>
+
+      <div className="fixed bg-white w-full py-5">
+        <div className="mt-20 w-full">
+          <h1 className="flex justify-center font-bold text-4xl text-blue-950">
+            Temukan Advokat Pilihanmu
+          </h1>
+        </div>
         {/* -----search---- */}
-        <div style={{marginLeft:400}} className=" flex pl-12  pb-3 pt-5 bg-white ">
-          <form className=" flex gap-3 ">
+        <div className="flex justify-center bg-white ">
+          <form className="flex gap-3 mt-3">
             <div>
               <input
                 style={{ width: 535 }}
@@ -55,20 +55,17 @@ const page = ({ item }) => {
             </button>
           </form>
         </div>
-        </div>
-
-
+      </div>
 
       <div className="h-screen w-full  px-20 ">
-
         {/* --------Card--------- */}
 
-        <div className=" h-screen w-full mt-10  justify-center flex ">
+        <div className=" h-screen w-full mt-52 justify-center flex ">
           <div className=" ">
             {data.map((item, index) => {
               return (
                 <>
-                  <Link href={`/advokat/${item.Id}`}>
+                  <Link href={`/advokat/${item._id}`}>
                     <div key={index}>
                       <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
                         <div>
