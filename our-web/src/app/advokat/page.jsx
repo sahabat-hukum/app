@@ -227,8 +227,7 @@ const page = ({item}) => {
                                 <>
                                 <div key={index}>
                                   <p
-                                    className=" bg-slate-300 px-2 py-1 rounded-sm"
-                                  
+                                    className=" bg-slate-300 px-2 py-1 rounded-sm"                                  
                                   >
                                     {category}
                                   </p>
