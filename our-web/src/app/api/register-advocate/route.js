@@ -8,7 +8,7 @@ export async function POST(request) {
 
     const { NIA } = body;
 
-    // const newUser = await Advocate.addAdvocate(body);
+    const newUser = await Advocate.addAdvocate(body);
 
     return NextResponse.json(
       {
