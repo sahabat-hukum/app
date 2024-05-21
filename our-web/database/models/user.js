@@ -4,12 +4,16 @@ const { z } = require("zod");
 
 export const registerSchema = z.object({
   name: z.string().nonempty("Nama tidak boleh kosong"),
-  email: z.string().email("Format email salah"),
-  mobile: z
-    .string()
-    .min(10, "No Handphone minimal 10 digit")
-    .max(13, "No handphone maksimal 13 digit")
-    .regex(/^\d+$/, "No handphone hanya boleh berisi nomor"),
+  identifier: z.union([
+    z
+      .string()
+      .email("Format email salah"),
+    z
+      .string()
+      .min(10, "No Handphone minimal 10 digit")
+      .max(13, "No handphone maksimal 13 digit")
+      .regex(/^\d+$/, "No handphone hanya boleh berisi nomor")
+  ]),
   password: z
     .string()
     .min(6, "Password minimal 6 karakter")
