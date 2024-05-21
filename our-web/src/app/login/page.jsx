@@ -1,8 +1,47 @@
-
 import React from "react";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const page = () => { 
+const page = async () => { 
+  "use server"
+  const handleLogin = async (formData) => {
+    "use server"
+    // console.log(formData)
+    const rawData = {
+      identifier : formData.get("identifier"),
+      password : formData.get("password")
+    }
+  
+    const res = await fetch ("http://localhost:3000/api/login", {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(rawData)
+    })
+  
+    const result = await res.json()
+    console.log(result, "<<< ini result")
+  
+    if (!res.ok) {
+      return res.json(
+        {
+          message: "Login terlebih dahulu"
+        },
+        {
+          status: 404
+        }
+      )
+    }
+  
+    cookies().set("Authorization", `Bearer ${result.access_token}`)
+    // console.log(result, "<<<")
+  
+    redirect("/")
+  } 
+  
   return (
     <div>
       <div>
@@ -10,24 +49,15 @@ const page = () => {
           <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
             <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
             <form
-              action={""}
+              action={handleLogin}
               className="bg-white shadow w-full rounded-lg divide-y divide-gray-200"
             >
               <div className="px-5 py-7">
                 <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                  Name
-                </label>
-                <input
-                  name="name"
-                  type="text"
-                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                />
-
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">
                   Email/No.hp
                 </label>
                 <input
-                  name="reqInput"
+                  name="identifier"
                   type="text"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 />
@@ -37,12 +67,11 @@ const page = () => {
                 </label>
                 <input
                   name="password"
-                  type="text"
+                  type="password"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 />
-                <Link href={"/"} >
                 <button
-                  type="button"
+                  type="submit"
                   className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                 >
                   <span className="inline-block mr-2">Login</span>
@@ -60,8 +89,7 @@ const page = () => {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </button>  
-                </Link>             
+                </button>             
               </div>
             </form>
             <div className="mt-4 font-semibold text-sm text-gray-600 pb-1 block text-center">
