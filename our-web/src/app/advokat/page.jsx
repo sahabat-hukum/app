@@ -169,15 +169,15 @@ const page = ({item}) => {
       <div className="pt-20">
         <Navbar />
       </div>
-
-      <div className="mt-24  text-center">
+ 
+ <div className="fixed  bg-white ">
+      <div className="mt-24 ml-96 pl-14  text-center">
         <h1 className="font-bold text-4xl text-blue-950 mr-32 ">
           Temukan Advokat Pilihanmu
         </h1>
       </div>
-      <div className="h-screen w-full  px-20 ">
         {/* -----search---- */}
-        <div className=" flex ml-80 pl-12 sticky top-24   pb-3 pt-5 bg-white ">
+        <div style={{marginLeft:400}} className=" flex pl-12  pb-3 pt-5 bg-white ">
           <form className=" flex gap-3 ">
             <div>
               <input
@@ -191,6 +191,11 @@ const page = ({item}) => {
             </button>
           </form>
         </div>
+        </div>
+
+
+
+      <div className="h-screen w-full  px-20 ">
 
         {/* --------Card--------- */}
 
