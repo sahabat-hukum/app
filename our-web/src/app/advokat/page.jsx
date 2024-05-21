@@ -21,7 +21,7 @@ const page = ({item}) => {
       Tentang:
         "Raden Destayoma Anugrah Putra Armanda, S.H. merupakan seorang Advokat ",
       LinkFoto:
-        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355/",
+        "https://storage.googleapis.com/perqara-public/lawyer/photo_1714634355",
     },
     {
       Id: "000000090999",

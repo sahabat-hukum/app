@@ -1,19 +1,19 @@
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/dist/server/api-utils";
 import React from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const page = () => {
   const handleRegister = async (formData) => {
     "use server";
     try {
       const data = {
-        nama: formData.get("nama"),
-        reqInput: formData.get("reqInput"),
+        name: formData.get("nama"),
+        identifier: formData.get("reqInput"),
         password: formData.get("password"),
       };
 
-      const response = await fetch("   ", {
+      const response = await fetch("http://localhost:3001/api/register", {
         method: "POST",
         cache: "no-cache",
         headers: {
@@ -48,7 +48,7 @@ const page = () => {
                   Name
                 </label>
                 <input
-                  name="name"
+                  name="nama"
                   type="text"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 />
@@ -71,7 +71,7 @@ const page = () => {
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 />
                 <button
-                  type="button"
+                  type="submit"
                   className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                 >
                   <span className="inline-block mr-2">Register</span>
