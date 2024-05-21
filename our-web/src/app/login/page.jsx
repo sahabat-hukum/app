@@ -13,7 +13,7 @@ const page = async () => {
       password : formData.get("password")
     }
   
-    const res = await fetch ("http://localhost:3000/api/login", {
+    const res = await fetch ( process.env.NEXT_PUBLIC_BASE_URL + "/api/login", {
       method: "POST",
       cache: "no-store",
       headers: {
@@ -23,21 +23,13 @@ const page = async () => {
     })
   
     const result = await res.json()
-    console.log(result, "<<< ini result")
+    // console.log(result, "<<< ini result")
   
     if (!res.ok) {
-      return res.json(
-        {
-          message: "Login terlebih dahulu"
-        },
-        {
-          status: 404
-        }
-      )
+      redirect("/login?err=" + result.error);
     }
   
     cookies().set("Authorization", `Bearer ${result.access_token}`)
-    // console.log(result, "<<<")
   
     redirect("/")
   } 

@@ -42,13 +42,13 @@ export default class User {
     return database.collection("users");
   }
 
-  static async findByEmail(email) {
-    const user = await this.collection().findOne({ email });
+  static async findByEmail(identifier) {
+    const user = await this.collection().findOne({ identifier });
     return user;
   }
 
-  static async findByMobile(mobile) {
-    const user = await this.collection().findOne({ mobile });
+  static async findByMobile(identifier) {
+    const user = await this.collection().findOne({ identifier });
     return user;
   }
 
@@ -76,6 +76,7 @@ export default class User {
     }
 
     newUser.password = hashPassword(newUser.password);
+    newUser.role = "User";
 
     const user = await this.collection().insertOne(newUser);
 
