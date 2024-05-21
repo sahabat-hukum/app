@@ -11,4 +11,13 @@ const verifyToken = (token) => {
   return payload;
 };
 
-module.exports = { createToken, verifyToken };
+const verifyWithJose = async (token) => {
+const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+
+  return await jwtVerify<{
+      id
+  }>(token, secret)
+
+}
+
+module.exports = { createToken, verifyToken, verifyWithJose };

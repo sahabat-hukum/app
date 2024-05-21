@@ -3,7 +3,7 @@ import { database } from "../config";
 import { z } from "zod";
 
 const postSchema = z.object({
-  // userId: z.string().nonempty("userId tidak boleh kosong"),
+  userId: z.string().nonempty("userId tidak boleh kosong"),
   title: z.string().nonempty("Title tidak boleh kosong"),
   content: z.string().nonempty("Content tidak boleh kosong"),
 });
@@ -37,10 +37,10 @@ export default class Post {
       throw postValidation.error;
     }
 
+    postInput.userId = new ObjectId(String(postInput.userId))
     postInput.vote = 0;
     postInput.slug = slugify(postInput.title);
     postInput.createdAt = new Date();
-
     const post = await this.collection().insertOne(postInput);
 
     return {

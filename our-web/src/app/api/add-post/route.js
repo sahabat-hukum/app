@@ -4,7 +4,11 @@ import Post from "../../../../database/models/post";
 
 export async function POST(request) {
   try {
+    const userId = request.headers.get("x-user-id")
+
     const body = await request.json();
+
+    body.userId = userId
 
     await Post.createPost(body);
 

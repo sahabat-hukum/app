@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -6,10 +7,9 @@ const AddQuestion = async () => {
   "use server";
   const handleSubmit = async (formData) => {
     "use server";
-
     const input = {
-      email: formData.get("title"),
-      password: formData.get("content"),
+      title: formData.get("title"),
+      content: formData.get("content"),
     };
 
     const res = await fetch(
@@ -19,6 +19,7 @@ const AddQuestion = async () => {
         cache: "no-store",
         headers: {
           "Content-type": "application/json",
+          "Cookie" : cookies().toString()
         },
         body: JSON.stringify(input),
       }
