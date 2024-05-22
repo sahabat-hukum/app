@@ -37,7 +37,7 @@ export default class Post {
       throw postValidation.error;
     }
 
-    postInput.userId = new ObjectId(String(postInput.userId))
+    postInput.userId = new ObjectId(String(postInput.userId));
     postInput.vote = 0;
     postInput.slug = slugify(postInput.title);
     postInput.createdAt = new Date();
@@ -61,5 +61,123 @@ export default class Post {
       { _id: ObjectId(String(id)) },
       { $: { vote: -1 } }
     );
+  }
+
+  static async getPost(page, search) {
+    const aggregate = [
+      {
+        $match: {
+          title: {
+            $regex: `^${search || ""}`,
+            $options: "i",
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: {
+          path: "$user",
+          includeArrayIndex: "string",
+          preserveNullAndEmptyArrays: false,
+        },
+      },
+      {
+        $unset: "user.password",
+      },
+      {
+        $lookup: {
+          from: "answers",
+          localField: "_id",
+          foreignField: "postId",
+          as: "answers",
+        },
+      },
+      {
+        $sort: {
+          createdAt: 1,
+        },
+      },
+      {
+        $skip: ((page || 1) - 1) * 5,
+      },
+      {
+        $limit: 5,
+      },
+    ];
+
+    try {
+      const data = await this.col().aggregate(aggregate).toArray();
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getPostBySlug(slug) {
+    const aggregate = [
+      {
+        $match: {
+          slug: slug,
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: {
+          path: "$user",
+          includeArrayIndex: "string",
+          preserveNullAndEmptyArrays: false,
+        },
+      },
+      {
+        $lookup: {
+          from: "answers",
+          localField: "_id",
+          foreignField: "postId",
+          as: "answers",
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "answers.userId",
+          foreignField: "_id",
+          as: "answers-user",
+        },
+      },
+      {
+        $unset: [
+          "answers-user.password",
+          "answers-user.city",
+          "answers-user.category",
+          "answers-user.education",
+          "answers-user.about",
+          "answers-user.identifier",
+          "answers-user.role",
+        ],
+      },
+    ];
+
+    try {
+      const data = await this.col().aggregate(aggregate).toArray();
+
+      return data[0];
+    } catch (error) {
+      throw error;
+    }
   }
 }
