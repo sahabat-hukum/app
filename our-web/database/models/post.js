@@ -89,7 +89,7 @@ export default class Post {
         },
       },
       {
-        $unset: "user.password",
+        $unset: ["user.password", "content"],
       },
       {
         $lookup: {
@@ -113,7 +113,7 @@ export default class Post {
     ];
 
     try {
-      const data = await this.col().aggregate(aggregate).toArray();
+      const data = await this.collection().aggregate(aggregate).toArray();
 
       return data;
     } catch (error) {
@@ -156,7 +156,7 @@ export default class Post {
           from: "users",
           localField: "answers.userId",
           foreignField: "_id",
-          as: "answers-user",
+          as: "answersUser",
         },
       },
       {
@@ -173,7 +173,7 @@ export default class Post {
     ];
 
     try {
-      const data = await this.col().aggregate(aggregate).toArray();
+      const data = await this.collection().aggregate(aggregate).toArray();
 
       return data[0];
     } catch (error) {
