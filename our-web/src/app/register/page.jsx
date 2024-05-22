@@ -13,7 +13,7 @@ const page = () => {
         password: formData.get("password"),
       };
 
-      const response = await fetch("http://localhost:3001/api/register", {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/register", {
         method: "POST",
         cache: "no-cache",
         headers: {

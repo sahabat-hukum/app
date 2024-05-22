@@ -5,7 +5,7 @@ const User = require("../../../../database/models/user").default;
 export async function POST(request) {
   try {
     const body = await request.json();
-    console.log(body,">>>>>>>>>>>>>>>>>>>>>>>>");
+    // console.log(body,">>>>>>>>>>>>>>>>>>>>>>>>");
 
     const { email, mobile } = body;
 
