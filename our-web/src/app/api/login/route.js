@@ -33,6 +33,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         access_token: accessToken,
+        _id: user._id
       },
       {
         status: 200,
