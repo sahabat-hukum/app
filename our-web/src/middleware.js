@@ -31,6 +31,75 @@ export async function middleware(request) {
         }
       );
     }
+  }
+
+  if (request.nextUrl.pathname.startsWith("/chat-list")) {
+    // console.log("masuk middleware")
+    const authorization = cookies().get("Authorization");
+    // console.log(authorization, "<<<")
+    if (!authorization) {
+      return NextResponse.json(
+        {
+          message: "Anda harus login dahulu",
+        },
+        {
+          status: "401",
+        }
+      );
+    }
+
+    const token = authorization.value.split(" ")[1];
+    // console.log(token, "<<< token")
+
+    if (!token) {
+      return NextResponse.json(
+        {
+          message: "Anda harus login dahulu",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+  }
+
+  if (request.nextUrl.pathname.startsWith("/chat-list")) {
+    // console.log("masuk middleware")
+    const authorization = cookies().get("Authorization");
+    // console.log(authorization, "<<<")
+    if (!authorization) {
+      return NextResponse.json(
+        {
+          message: "Anda harus login dahulu",
+        },
+        {
+          status: "401",
+        }
+      );
+    }
+
+    const token = authorization.value.split(" ")[1];
+    // console.log(token, "<<< token")
+
+    if (!token) {
+      return NextResponse.json(
+        {
+          message: "Anda harus login dahulu",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+  }
+
+  if (request.nextUrl.pathname.startsWith("/")) {
+    const authorization = cookies().get("Authorization");
+    // console.log(authorization, "<<<")
+
+    const token = authorization?.value.split(" ")[1];
+    // console.log(token, "<<< token")
+    if (!token) return;
 
     const secret = new TextEncoder().encode("verysecret");
     const jwt = token;
@@ -45,21 +114,6 @@ export async function middleware(request) {
       },
     });
     return response;
-  }
-
-  if (request.nextUrl.pathname.startsWith("/login")) {
-    const authorization = cookies().get("Authorization");
-
-    if (!authorization) {
-      return NextResponse.json(
-        {
-          message: "Anda harus login dahulu",
-        },
-        {
-          status: "401",
-        }
-      );
-    }
 
     const token = authorization.value.split(" ")[1];
     // console.log(token, "<<< token")
