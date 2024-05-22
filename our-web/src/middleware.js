@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function middleware(request) {
-  if (request.nextUrl.pathname.startsWith("/api/add-post")) {
+  if (request.nextUrl.pathname.startsWith("/addQuestion")) {
     // console.log("masuk middleware")
     const authorization = cookies().get("Authorization");
     // console.log(authorization, "<<<")

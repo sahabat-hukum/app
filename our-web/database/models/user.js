@@ -44,21 +44,9 @@ export default class User {
     return await this.collection().findOne({ _id: new ObjectId(String(id)) });
   }
 
-  static async findByEmail(identifier) {
-    const user = await this.collection().findOne({ identifier });
-    return user;
-  }
-
-  static async findByMobile(identifier) {
-    const user = await this.collection().findOne({ identifier });
-    return user;
-  }
-
   static async findByIdentifier(identifier) {
-    if (z.string().email().safeParse(identifier).success) {
-      return await this.findByEmail(identifier);
-    }
-    return await this.findByMobile(identifier);
+    const user = await this.collection().findOne({ identifier });
+    return user;
   }
 
   static async addUser(newUser) {
@@ -66,15 +54,10 @@ export default class User {
     if (!result.success) {
       throw result.error;
     }
-
-    const existingEmail = await this.findByEmail(newUser.email);
-    if (existingEmail) {
-      throw new Error("Email sudah terdaftar");
-    }
-
-    const existingMobile = await this.findByMobile(newUser.mobile);
-    if (existingMobile) {
-      throw new Error("No Handphone sudah terdaftar");
+  
+    const existingIdentifier = await this.findByIdentifier(newUser.identifier);
+    if (existingIdentifier) {
+      throw new Error("Email/no handphone sudah terdaftar");
     }
 
     newUser.password = hashPassword(newUser.password);
