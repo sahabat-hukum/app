@@ -70,9 +70,12 @@ const page = ({ params }) => {
                 <>
                   <div className="px-2 py-4 mt-5 rounded-sm bg-slate-200">
                     <p className="font-bold bg-blue-200 text-slate-800 px-3 py-2 inline-block rounded-sm">
-                      {/* {item?.answersUser[index]?.name} */}
+                      {data?.answersUser[index]?.name}
+                      {/* {JSON.stringify(item)} */}
                     </p>
-                    <p className="mt-5">{item.content}</p>
+                    <p className="mt-5" style={{ whiteSpace: "pre-line" }}>
+                      {item.content}
+                    </p>
                   </div>
                 </>
               );
