@@ -114,33 +114,5 @@ export async function middleware(request) {
       },
     });
     return response;
-
-    const token = authorization.value.split(" ")[1];
-    // console.log(token, "<<< token")
-
-    if (!token) {
-      return NextResponse.json(
-        {
-          message: "Anda harus login dahulu",
-        },
-        {
-          status: 401,
-        }
-      );
-    }
-
-    const secret = new TextEncoder().encode("verysecret");
-    const jwt = token;
-
-    const { payload } = await jwtVerify(jwt, secret);
-
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-user-id", payload._id);
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    return response;
   }
 }

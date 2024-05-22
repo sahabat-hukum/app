@@ -1,8 +1,11 @@
 "use client";
+import { logoutAction } from "@/actions/logout";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import React from "react";
 
-const Navbar = () => {
+const Navbar = () => {  
+  const isLogIn = Cookies.get("Authorization")
   return (
     <>
       <div className="h-24 w-full shadow-md flex z-20  justify-between pt-6 px-10 bg-white fixed -translate-y-20">
@@ -16,7 +19,7 @@ const Navbar = () => {
             </div>
           </div>
         </Link>
-        <div className="flex gap-60 mt-3 font-bold">
+        <div className="flex gap-6 mt-3 font-bold">
           <Link href="/diskusi">
             {" "}
             <div className="hover:text-blue-950">Diskusi</div>
@@ -27,10 +30,15 @@ const Navbar = () => {
           </Link>
           <div className="hover:text-blue-950">Profile</div>
         </div>
+        {!isLogIn ? (
         <Link href="/login">
           {" "}
           <div className=" mt-3 font-bold hover:text-blue-950">Login</div>
-        </Link>
+        </Link> 
+        ) : (<div className="mt-3 font-bold  hover:text-blue-950"><button onClick={() => {logoutAction()}} className="bg-blue-950 px-2 py-1 rounded-sm text-white">
+        {" "}
+        Logout
+      </button></div>)}
       </div>
     </>
   );
