@@ -1,4 +1,4 @@
-
+"use server"
 import { headers } from "next/headers";
 import User from "../../../database/models/user";
 import Chat from "@/components/chatList";
