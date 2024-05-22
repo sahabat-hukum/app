@@ -5,6 +5,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Modal from "@/components/modal";
 
+
+
 const page = () => {
   const [data, setData] = useState([]);
 
@@ -27,6 +29,7 @@ const page = () => {
         setData(data);
       } catch (error) {
         console.log(error);
+  
       }
     })();
   }, []);
@@ -48,7 +51,7 @@ const page = () => {
             {" "}
             <div className=" flex justify-start ml-40 mt-5 text-white">
               <button className=" bg-blue-950 px-3 py-2 rounded-md">
-                Tambaha Pertanyaan
+                Tambah Pertanyaan
               </button>
             </div>
           </Link>
