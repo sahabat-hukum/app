@@ -29,12 +29,37 @@ export default class Advocate {
       ...newAdvocate,
     };
   }
-  static async getAdvocates() {
-    return await database
-      .collection("users")
-      .find({ role: "Advokat" })
-      .limit(10)
-      .toArray();
+  static async getAdvocates(page, search) {
+    const aggregate = [
+      {
+        $match: {
+          role: "Advokat",
+        },
+      },
+      {
+        $match: {
+          name: {
+            $regex: `^${search || ""}`,
+            $options: "i",
+          },
+        },
+      },
+      {
+        $unset: ["about", "password"],
+      },
+      {
+        $sort: {
+          experience: -1,
+        },
+      },
+      {
+        $skip: ((page || 1) - 1) * 8,
+      },
+      {
+        $limit: 8,
+      },
+    ];
+    return await database.collection("users").aggregate(aggregate).toArray();
   }
 
   static async getAdvocateById(_id) {
