@@ -5,7 +5,6 @@ import Chat from "@/components/chatList";
 export default async function Page() {
   const headersList = headers();
   const userId = headersList.get("x-user-id");
-  console.log(userId);
 
   const user = await User.findById(userId);
   return (

@@ -17,7 +17,7 @@ const page = async ({ params }) => {
             <div>
               <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
                 <div>
-                  <img 
+                  <img
                     style={{ width: 800 }}
                     className=" rounded-md "
                     src={advokat.imgUrl}
@@ -53,9 +53,11 @@ const page = async ({ params }) => {
                 </div>
               </div>
               <div className=" bg-blue-100 w-full h-16 py-2  px-4 flex justify-between">
-                <button className="ml-2 bg-blue-800 rounded-md w-64  py-2 text-white px-4 hover:bg-blue-950  ">
-                  Konsultasikan
-                </button>
+                <Link href={"/chats/" + advokat._id}>
+                  <button className="ml-2 bg-blue-800 rounded-md w-64  py-2 text-white px-4 hover:bg-blue-950  ">
+                    Konsultasikan
+                  </button>
+                </Link>
                 <Link href="/advokat">
                   {" "}
                   <button className="ml-2 bg-slate-500 rounded-md w-32  py-2 text-white px-4 hover:bg-slate-600  ">
