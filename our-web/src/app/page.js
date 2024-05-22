@@ -1,7 +1,7 @@
 "use client"
 import About from '@/components/about'
 import Navbar from '@/components/navbar'
-import ChatBox from '@/components/chatbox'
+import Modal from '@/components/modal'
 import React from 'react'
 
 const page = () => {
@@ -10,7 +10,7 @@ const page = () => {
     <div className='bg-white'>
       <Navbar/>  
       <About/>
-      <ChatBox/>
+      <Modal/>
     </div>
   )
 }
