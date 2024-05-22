@@ -2,32 +2,43 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import Swal from "sweetalert2";
+
 
 const AddQuestion = async () => {
   "use server";
   const handleSubmit = async (formData) => {
-    "use server";
-    const input = {
-      title: formData.get("title"),
-      content: formData.get("content"),
-    };
-
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_BASE_URL + "/api/add-post",
-      {
-        method: "POST",
-        cache: "no-store",
-        headers: {
-          "Content-type": "application/json",
-          "Cookie" : cookies().toString()
-        },
-        body: JSON.stringify(input),
-      }
-    );
-
-    if (!res.ok) throw new Error("Failed to Add Post");
-
-    redirect("/diskusi");
+    try {
+      "use server";
+      const input = {
+        title: formData.get("title"),
+        content: formData.get("content"),
+      };
+  
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_BASE_URL + "/api/add-post",
+        {
+          method: "POST",
+          cache: "no-store",
+          headers: {
+            "Content-type": "application/json",
+            "Cookie" : cookies().toString()
+          },
+          body: JSON.stringify(input),
+        }
+      );
+  
+  
+  
+  
+      if (!res.ok) throw new Error("Failed to Add Post");
+    
+  
+      redirect("/diskusi");
+      
+    } catch (error) {
+      throw new Error(error+"<<<<<<<<<<<<<<<<<<<<")
+    }
   };
 
   return (
