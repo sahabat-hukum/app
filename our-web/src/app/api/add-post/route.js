@@ -4,7 +4,9 @@ import Post from "../../../../database/models/post";
 
 export async function POST(request) {
   try {
+    console.log(request, "<<< req")
     const userId = request.headers.get("x-user-id")
+    console.log(userId, "<<<")
 
     const body = await request.json();
 

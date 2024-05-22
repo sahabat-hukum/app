@@ -2,10 +2,9 @@
 import { useCallback, useEffect, useState } from "react";
 import Talk from "talkjs";
 import { Session, Chatbox } from "@talkjs/react";
-import { headers } from "next/headers";
+
 
 function Chat() {
-  const headersList = headers();
   const userId = headersList.get("x-user-id");
   const [dataMe, setDataMe] = useState(null);
 

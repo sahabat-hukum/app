@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar";
 import Tambah from "@/components/tambah";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Modal from "@/components/modal";
 
 const page = () => {
   const [data, setData] = useState([]);
@@ -87,6 +88,7 @@ const page = () => {
           })}
         </div>
       </div>
+      <Modal/>
     </>
   );
 };
