@@ -7,7 +7,6 @@ const page = async () => {
   "use server"
   const handleLogin = async (formData) => {
     "use server"
-    // console.log(formData)
     const rawData = {
       identifier : formData.get("identifier"),
       password : formData.get("password")
@@ -23,14 +22,12 @@ const page = async () => {
     })
   
     const result = await res.json()
-    // console.log(result, "<<< ini result")
   
     if (!res.ok) {
       redirect("/login?err=" + result.error);
     }
   
     cookies().set("Authorization", `Bearer ${result.access_token}`)
-  
     redirect("/")
   } 
   

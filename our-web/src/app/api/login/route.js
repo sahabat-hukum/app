@@ -27,6 +27,7 @@ export async function POST(request) {
 
     const accessToken = createToken({
       _id: user._id,
+      role: user.role
     });
 
     return NextResponse.json(
