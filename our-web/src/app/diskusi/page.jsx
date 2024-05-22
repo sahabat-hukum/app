@@ -116,9 +116,9 @@ const page = () => {
           <h1 className="font-bold text-4xl text-blue-950 mr-32">
             Pertanyaan paling populer
           </h1>
-          <div className=" flex justify-start ml-40 mt-5 text-white">
-         <Link href="/addQuestion"> <button className=" bg-blue-950 px-3 py-2 rounded-md">Tambah Pertanyaan</button></Link>
-          </div>
+         <Link href="/addQuestion"> <div className=" flex justify-start ml-40 mt-5 text-white">
+          <button className=" bg-blue-950 px-3 py-2 rounded-md">Tambaha Pertanyaan</button>
+          </div></Link>
         </div>
 
         <div style={{ marginLeft: 460 }} className="  h-screen mt-3 pt-36 flex-col ">
