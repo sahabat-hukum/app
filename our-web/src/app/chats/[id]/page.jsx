@@ -4,10 +4,11 @@ import Talk from "talkjs";
 import { Session, Chatbox } from "@talkjs/react";
 import { headers } from "next/headers";
 
-function Chat() {
+function Chat({ params }) {
   const headersList = headers();
   const userId = headersList.get("x-user-id");
   const [dataMe, setDataMe] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -31,6 +32,28 @@ function Chat() {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_BASE_URL + `/api/user/` + params.id,
+          {
+            method: "GET",
+            cache: "no-store",
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const data = await res.json();
+
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   const syncUser = useCallback(
     () =>
       new Talk.User({
@@ -48,10 +71,10 @@ function Chat() {
     const conversation = session.getOrCreateConversation("new_conversation");
 
     const other = new Talk.User({
-      id: "frank",
-      name: "Frank",
-      email: "frank@example.com",
-      photoUrl: "https://talkjs.com/new-web/avatar-8.jpg",
+      id: data._id,
+      name: data.name,
+      email: data.identifier,
+      photoUrl: data.imgUrl,
       welcomeMessage: "Hey, how can I help?",
     });
     conversation.setParticipant(session.me);
@@ -60,7 +83,14 @@ function Chat() {
     return conversation;
   }, []);
 
-  return <Session appId="t6cWkLWk" syncUser={syncUser}></Session>;
+  return (
+    <Session appId="t6cWkLWk" syncUser={syncUser}>
+      <Chatbox
+        syncConversation={syncConversation}
+        style={{ width: "100%", height: "500px" }}
+      ></Chatbox>
+    </Session>
+  );
 }
 
 export default Chat;
