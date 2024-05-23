@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/navbar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -30,14 +29,14 @@ const page = ({ item }) => {
   }, []);
   return (
     <>
-      <div className="fixed bg-white w-full py-5">
-        <div className="mt-20 w-full">
+      <div className="bg-white w-full py-5">
+        <div className="mt-10 w-full">
           <h1 className="flex justify-center font-bold text-4xl text-blue-950">
             Temukan Advokat Pilihanmu
           </h1>
         </div>
         {/* -----search---- */}
-        <div className="flex justify-center bg-white ">
+        <div className="flex mt-4 justify-center bg-white ">
           <form className="flex gap-3 mt-3">
             <div>
               <input
@@ -53,10 +52,10 @@ const page = ({ item }) => {
         </div>
       </div>
 
-      <div className="h-screen w-full  px-20 ">
+      <div className="w-full">
         {/* --------Card--------- */}
 
-        <div className=" h-screen w-full mt-52 justify-center flex ">
+        <div className="w-full justify-center flex ">
           <div className=" ">
             {data.map((item, index) => {
               return (
@@ -99,10 +98,12 @@ const page = ({ item }) => {
                           </div>
                         </div>
                       </div>
-                      <div className=" bg-blue-100 w-full h-16 py-2 text-end px-4">
-                        <button className="bg-blue-800 rounded-md  py-2 text-white px-4 hover:bg-blue-950  ">
-                          Konsultasikan
-                        </button>
+                      <div className=" bg-blue-100 w-full h-16 py-2 text-end px-4 rounded-b-md">
+                        <Link href={"/chats/" + item._id}>
+                          <button className="ml-2 bg-blue-800 rounded-md w-64  py-2 text-white px-4 hover:bg-blue-950  ">
+                            Konsultasikan
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </Link>

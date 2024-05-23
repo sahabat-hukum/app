@@ -8,55 +8,52 @@ const page = async ({ params }) => {
   return (
     <>
       <div>
-        <div className=" h-screen w-full mt-10  justify-center flex px-36 ">
+        <div className="w-full mt-10 justify-center flex px-36">
           <div className=" ">
             <div>
-              <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
-                <div>
+              <div className="flex flex-col gap-8 lg:gap-4 lg:flex-row p-12 bg-blue-100 rounded-t-md border-b-2 border-slate-300 ">
+                <div className="basis-1/3">
                   <img
-                    style={{ width: 800 }}
-                    className=" rounded-md "
+                    className="rounded-md"
                     src={advokat.imgUrl}
-                    alt=""
+                    alt={advokat.name}
                   />
                 </div>
-
-                <div>
-                  <p className="font-bold text-md">{advokat.name}</p>
-                  <div className="flex gap-4 mt-2 ">
+                <div className="flex flex-col gap-4 lg:gap-2 xl:gap-3 basis-2/3">
+                  <p className="xl:mt-8 font-bold text-3xl">{advokat.name}</p>
+                  <div className="flex gap-4">
                     <p>{advokat.city}</p>I<p>Pengalaman {advokat.experience}</p>
                   </div>
-                  <div className="flex gap-2 text-sm font-light mt-5">
+                  <div className="flex flex-wrap gap-2 text-sm font-light">
                     {advokat.category.split(", ").map((category, index) => {
                       return (
                         <>
-                          <p
-                            className=" bg-slate-300 px-2 py-1 rounded-sm"
-                            key={index}
-                          >
-                            {category}
-                          </p>
+                          <div key={index}>
+                            <p className=" bg-slate-300 px-2 py-1 rounded-sm">
+                              {category}
+                            </p>
+                          </div>
                         </>
                       );
                     })}
                   </div>
-                  <div className="mt-5 flex">
+                  <div>
                     <p className="font-bold">Pendidikan :</p>
                     <p>{advokat.education}</p>
                   </div>
-                  <div className="font-bold mt-5">Tentang Advokat</div>
-                  <div>{advokat.about}</div>
+                  <p className="font-bold">Tentang Advokat</p>
+                  <p>{advokat.about}</p>
                 </div>
               </div>
-              <div className=" bg-blue-100 w-full h-16 py-2  px-4 flex justify-between">
+              <div className="bg-blue-100 w-full py-8 px-12 flex justify-between rounded-b-md">
                 <Link href={"/chats/" + advokat._id}>
-                  <button className="ml-2 bg-blue-800 rounded-md w-64  py-2 text-white px-4 hover:bg-blue-950  ">
+                  <button className="btn bg-blue-800 px-8 text-white hover:bg-blue-950 text-md">
                     Konsultasikan
                   </button>
                 </Link>
                 <Link href="/advokat">
                   {" "}
-                  <button className="ml-2 bg-slate-500 rounded-md w-32  py-2 text-white px-4 hover:bg-slate-600  ">
+                  <button className="btn bg-slate-500 text-white px-8 hover:bg-slate-600 text-md">
                     Kembali
                   </button>
                 </Link>
