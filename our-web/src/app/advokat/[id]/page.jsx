@@ -7,10 +7,6 @@ const page = async ({ params }) => {
   const advokat = await Advocate.getAdvocateById(params.id);
   return (
     <>
-      <div className="pt-20">
-        <Navbar />
-      </div>
-
       <div>
         <div className=" h-screen w-full mt-10  justify-center flex px-36 ">
           <div className=" ">

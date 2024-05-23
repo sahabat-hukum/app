@@ -28,9 +28,6 @@ export default function ChatBox() {
 
   return (
     <>
-    <div className="pt-20">
-    <Navbar />
-    </div>
       <main className="flex min-h-screen flex-col items-center p-12">
         {RenderMessages()}
         {RenderForm()}
@@ -67,9 +64,9 @@ export default function ChatBox() {
                 className="p-3 h-10 w-10 stroke-stone-500"
               />
             ) : (
-                <div className="mt-5 bg-blue-950 px-2 py-1 text-white rounded-sm hover:bg-blue-800">
+              <div className="mt-5 bg-blue-950 px-2 py-1 text-white rounded-sm hover:bg-blue-800">
                 Kirim
-                </div>
+              </div>
             )}
           </button>
         </form>
@@ -98,7 +95,7 @@ export default function ChatBox() {
             </div>
           );
         })}
-         <div className={`p-4 shadow-md rounded-md ml-10 relative`}>
+        <div className={`p-4 shadow-md rounded-md ml-10 relative`}>
           "Hai, ada yang bisa saya bantu?"{" "}
           {
             <Bot className="absolute top-2 -left-10 border rounded-full p-1 shadow-lg stroke-[0842A0]" />

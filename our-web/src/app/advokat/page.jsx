@@ -30,10 +30,6 @@ const page = ({ item }) => {
   }, []);
   return (
     <>
-      <div className="pt-20">
-        <Navbar />
-      </div>
-
       <div className="fixed bg-white w-full py-5">
         <div className="mt-20 w-full">
           <h1 className="flex justify-center font-bold text-4xl text-blue-950">

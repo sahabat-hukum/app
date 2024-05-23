@@ -33,10 +33,6 @@ const page = ({ params }) => {
 
   return (
     <>
-      <div className="pt-20">
-        <Navbar />
-      </div>
-
       <div style={{ marginLeft: 250 }} className="h-screen mt-3 flex-col">
         <div>
           <div
