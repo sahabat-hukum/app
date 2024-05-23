@@ -1,11 +1,12 @@
 "use client";
 import Coment from "@/components/coment";
 import Navbar from "@/components/navbar";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const page = ({ params }) => {
   const [data, setData] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -56,7 +57,7 @@ const page = ({ params }) => {
               <u>{data.user?.name}</u> <u> {data.createdAt}</u>{" "}
             </span>
           </div>
-          <Coment id={data._id} />
+          <Coment id={data._id} router={router} />
 
           <div style={{ width: 1000 }} className="">
             <a href="#up">
