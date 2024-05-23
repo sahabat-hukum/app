@@ -2,11 +2,11 @@ import { revalidatePath } from "next/cache";
 import React from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ErrorMessage from "@/components/errorMessage";
 
 const page = () => {
   const handleRegister = async (formData) => {
     "use server";
-    try {
       const data = {
         name: formData.get("nama"),
         identifier: formData.get("reqInput"),
@@ -23,13 +23,11 @@ const page = () => {
       });
 
       const result = await response.json();
+
       if (!response.ok) {
-        throw result;
+        redirect("/register?err=" + result.error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-    revalidatePath("/login");
+
     redirect("/login");
   };
 
@@ -39,6 +37,7 @@ const page = () => {
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
           <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
             <h1 className="font-bold text-center text-2xl mb-5">Register</h1>
+            <ErrorMessage/>
             <form
               action={handleRegister}
               className="bg-white shadow w-full rounded-lg divide-y divide-gray-200"

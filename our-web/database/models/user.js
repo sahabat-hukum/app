@@ -56,6 +56,7 @@ export default class User {
     }
   
     const existingIdentifier = await this.findByIdentifier(newUser.identifier);
+    console.log(existingIdentifier, "<<<<<")
     if (existingIdentifier) {
       throw new Error("Email/no handphone sudah terdaftar");
     }

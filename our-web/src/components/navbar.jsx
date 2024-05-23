@@ -8,7 +8,7 @@ const Navbar = () => {
   const isLogIn = Cookies.get("Authorization");
   return (
     <>
-      <div className="border-b-2 sticky top-0 ">
+      <div className="border-b-2 sticky top-0 z-100 ">
         <div className="lg:mx-20 bg-base-100   ">
           <div className="navbar">
             <div className="navbar-start ">

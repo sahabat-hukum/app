@@ -34,8 +34,7 @@ export async function POST(request) {
     }
 
     if (
-      error.message === "Email sudah terdaftar" ||
-      error.message === "No Handphone sudah terdaftar"
+      error.message === "Email/no handphone sudah terdaftar"
     ) {
       return NextResponse.json(
         {
