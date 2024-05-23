@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
@@ -55,6 +55,7 @@ const Page = () => {
 
   return (
     <>
+    {/* <Suspense fallback={<div>Loading...</div>}> */}
       <div className="bg-white w-full py-5">
         <div className="mt-10 w-full">
           <h1 className="flex justify-center font-bold text-4xl text-blue-950">
@@ -146,6 +147,7 @@ const Page = () => {
           ))}
         </div>
       </div>
+      {/* </Suspense> */}
     </>
   );
 };

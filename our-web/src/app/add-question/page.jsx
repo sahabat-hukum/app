@@ -6,10 +6,11 @@ import Swal from "sweetalert2";
 
 
 const AddQuestion = async () => {
-  "use server";
+
   const handleSubmit = async (formData) => {
+    "use server"
     try {
-      "use server";
+ 
       const input = {
         title: formData.get("title"),
         content: formData.get("content"),
@@ -34,13 +35,13 @@ const AddQuestion = async () => {
       if (!res.ok) throw new Error("Failed to Add Post");
     
   
-      redirect("/diskusi");
       
     } catch (error) {
       throw new Error(error+"<<<<<<<<<<<<<<<<<<<<")
     }
+    redirect("/diskusi");
   };
-
+  
   return (
     <div>
       <div

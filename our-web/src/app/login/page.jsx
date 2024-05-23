@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -33,6 +33,7 @@ const page = async () => {
   } 
   
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div>
       <div>
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
@@ -93,6 +94,7 @@ const page = async () => {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 };
 

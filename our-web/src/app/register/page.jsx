@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import React from "react";
+import React, {Suspense} from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import ErrorMessage from "@/components/errorMessage";
@@ -32,6 +32,7 @@ const page = () => {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div>
       <div>
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
@@ -96,6 +97,7 @@ const page = () => {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 };
 
