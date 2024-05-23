@@ -1,17 +1,31 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import Link from "next/link";
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+
+  const router = useRouter()
+
+  const [inputSearch, setInputSearch] = useState("")
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    router.push("/advokat?search="+inputSearch)
+  }
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Sesuaikan jumlah item per halaman
+  const itemsPerPage = 8;
 
   useEffect(() => {
     (async () => {
       try {
         const res = await fetch(
-          process.env.NEXT_PUBLIC_BASE_URL + `/api/advocates`,
+          process.env.NEXT_PUBLIC_BASE_URL + `/api/advocates?search=`+ (search?search:""),
           {
             method: "GET",
             cache: "no-store",
@@ -22,7 +36,7 @@ const Page = () => {
         );
         const result = await res.json();
         if (result.data) {
-          setData(result.data); // Pastikan `result.data` berisi seluruh data yang diterima dari backend
+          setData(result.data);
         }
       } catch (error) {
         console.log(error);
@@ -49,16 +63,17 @@ const Page = () => {
         </div>
         {/* -----search---- */}
         <div className="flex mt-4 justify-center bg-white ">
-          <form className="flex gap-3 mt-3">
+          <form className="flex gap-3 mt-3" onSubmit={handleSearch}>
             <div>
               <input
+                onChange={(event) => setInputSearch(event.target.value)}
                 style={{ width: 535 }}
                 className="h-10 px-3 outline outline-1 outline-blue-950 rounded-md"
                 type="text"
               />
             </div>
-            <button className="bg-blue-950 px-3 py-1 rounded-md text-white">
-              <p>Search</p>
+            <button type="submit" className="bg-blue-950 px-3 py-1 rounded-md text-white">
+              Search
             </button>
           </form>
         </div>

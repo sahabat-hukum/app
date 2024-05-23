@@ -51,7 +51,7 @@ export default class Post {
 
   
 
-  static async getPost(page, search) {
+  static async getPost(search, page) {
     const aggregate = [
       {
         $match: {

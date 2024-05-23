@@ -29,7 +29,7 @@ export default class Advocate {
       ...newAdvocate,
     };
   }
-  static async getAdvocates(page, search) {
+  static async getAdvocates(search, page) {
     const aggregate = [
       {
         $match: {
@@ -63,5 +63,10 @@ export default class Advocate {
     return await database
       .collection("users")
       .findOne({ _id: new ObjectId(String(_id)) });
+  }
+  static async getAdvocateByName(name) {
+    return await database
+      .collection("users")
+      .find({ _id: new ObjectId(String(_id)) });
   }
 }

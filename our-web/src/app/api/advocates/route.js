@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import Advocate from "../../../../database/models/advocate";
 
-export async function GET() {
+export async function GET(req) {
+  const url = new URL(req.url)
+  const search = url.searchParams.get("search");
   try {
-    const data = await Advocate.getAdvocates();
+    const data = await Advocate.getAdvocates(search);
     return NextResponse.json(
       {
         data,

@@ -1,11 +1,23 @@
 "use client";
-import Navbar from "@/components/navbar";
-import Tambah from "@/components/tambah";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Modal from "@/components/modal";
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+
+  const router = useRouter()
+
+  const [inputSearch, setInputSearch] = useState("")
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    router.push("/advokat?search="+inputSearch)
+  }
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
@@ -14,7 +26,7 @@ const page = () => {
     (async () => {
       try {
         const res = await fetch(
-          process.env.NEXT_PUBLIC_BASE_URL + `/api/post`,
+          process.env.NEXT_PUBLIC_BASE_URL + `/api/post?search=`+ (search?search:""),
           {
             method: "GET",
             cache: "no-store",
@@ -50,7 +62,7 @@ const page = () => {
           <h1 className="font-bold text-4xl text-blue-950 mr-32">
             Pertanyaan paling populer
           </h1>
-          <Link href="/addQuestion">
+          <Link href="/add-question">
             {" "}
             <div className=" flex justify-start ml-40 mt-5 text-white">
               <button className=" bg-blue-950 px-3 py-2 rounded-md">
