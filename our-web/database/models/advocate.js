@@ -55,9 +55,6 @@ export default class Advocate {
       {
         $skip: ((page || 1) - 1) * 8,
       },
-      {
-        $limit: 8,
-      },
     ];
     return await database.collection("users").aggregate(aggregate).toArray();
   }

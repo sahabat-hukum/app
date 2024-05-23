@@ -95,9 +95,6 @@ export default class Post {
       {
         $skip: ((page || 1) - 1) * 5,
       },
-      {
-        $limit: 5,
-      },
     ];
 
     try {
