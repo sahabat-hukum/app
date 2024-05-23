@@ -45,7 +45,7 @@ const page = () => {
       <div>
         <div
           style={{ marginLeft: 300, width: 900 }}
-          className=" text-center pb-5 bg-white pt-10  z-5 sticky top-10 "
+          className=" text-center pb-5 bg-white pt-10  z-5  "
         >
           <h1 className="font-bold text-4xl text-blue-950 mr-32">
             Pertanyaan paling populer
@@ -62,7 +62,7 @@ const page = () => {
 
         <div
           style={{ marginLeft: 460 }}
-          className="  h-screen mt-3 pt-36 flex-col "
+          className="  h-screen mt-3 flex-col "
         >
           {currentData?.map((item, index) => {
             
@@ -70,7 +70,7 @@ const page = () => {
                 <Link key={index} href={`/diskusi/${item.slug}`}>
                   <div
                     style={{ width: 600 }}
-                    className="  bg-slate-100 border-b-4 border-slate-600 h-44 mt-10 px-5 pt-3 rounded-md hover:bg-slate-200  "
+                    className="  bg-slate-100 border-b-4 border-slate-600 h-44 mt-10 px-5 pt-3 rounded-md hover:bg-slate-200 hover:scale-110 hover:duration-200  "
                   >
                     <p className="bg-blue-50 inline-block px-2 py-1 rounded-sm font-bold text-slate-700">
                       {item.title}
