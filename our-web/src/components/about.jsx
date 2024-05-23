@@ -8,7 +8,7 @@ const About = () => {
           <img
             className="rounded-lg mr-10"
             style={{ width: 800 }}
-            src="../../4.png"
+            src="../../10.jpg"
             alt=""
           />
         </div>
