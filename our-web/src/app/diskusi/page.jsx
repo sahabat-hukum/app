@@ -5,8 +5,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Modal from "@/components/modal";
 
-
-
 const page = () => {
   const [data, setData] = useState([]);
 
@@ -29,16 +27,12 @@ const page = () => {
         setData(data);
       } catch (error) {
         console.log(error);
-  
       }
     })();
   }, []);
 
   return (
     <>
-      <div className="pt-20">
-        <Navbar />
-      </div>
       <div>
         <div
           style={{ marginLeft: 300, width: 900 }}
@@ -91,7 +85,7 @@ const page = () => {
           })}
         </div>
       </div>
-      <Modal/>
+      <Modal />
     </>
   );
 };

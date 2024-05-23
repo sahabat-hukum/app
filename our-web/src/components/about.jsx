@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <>
-      <div className="  mx-20  flex justify-center mt-20 gap-10 ">
+      <div className="  mx-20  flex justify-center mt-20 gap-10 bg-white">
         <div>
           <img
             className="rounded-lg mr-10"
@@ -13,9 +13,13 @@ const About = () => {
           />
         </div>
         <div>
-          
           <div>
-            <img className="mb-10 ml-10" style={{width:500}}   src="../../8.png" alt="" />
+            <img
+              className="mb-10 ml-10"
+              style={{ width: 500 }}
+              src="../../8.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
