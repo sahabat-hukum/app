@@ -3,6 +3,7 @@ import Coment from "@/components/coment";
 import Navbar from "@/components/navbar";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/footer";
 
 const page = ({ params }) => {
   const [data, setData] = useState([]);
@@ -33,11 +34,11 @@ const page = ({ params }) => {
 
   return (
     <>
-      <div style={{ marginLeft: 250 }} className="h-screen mt-3 flex-col">
-        <div>
+   
+        <div className="flex flex-col items-center" >
           <div
             style={{ width: 1000 }}
-            className="  bg-slate-100 border-b-4 border-slate-600 h-64 mt-20 px-5 pt-3 rounded-md sticky top-24   "
+            className="  bg-slate-100 border-b-4 border-slate-600 h-64 mt-20 px-5 pt-3 rounded-md    "
           >
             <p className="bg-blue-50 inline-block px-2 py-1 rounded-sm font-bold text-slate-700">
               {data.title}
@@ -75,8 +76,10 @@ const page = ({ params }) => {
               );
             })}
           </div>
-        </div>
-      </div>
+        </div>    
+      
+      
+      
     </>
   );
 };

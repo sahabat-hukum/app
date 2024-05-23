@@ -70,8 +70,8 @@ const Page = () => {
           <div className="">
             {currentData.map((item, index) => (
               <Link href={`/advokat/${item._id}`} key={index}>
-                <div>
-                  <div className="mt-5 gap-3 px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300">
+                <div className="hover:scale-110 hover:duration-200">
+                  <div className="mt-5 gap-3 px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300  ">
                     <div>
                       <img
                         className="w-24 rounded-md"
