@@ -43,9 +43,6 @@ const page = ({ params }) => {
               {data.title}
             </p>
             <p className="mt-5 font-bold">{data.answers?.length} Comment</p>
-            <button className="bg-blue-100 px-2 py-1 rounded-md hover:bg-blue-200">
-              <p className="font-light">{data.vote} ❤</p>
-            </button>
 
             <span className=""> {data.content}</span>
 

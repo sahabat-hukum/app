@@ -49,19 +49,7 @@ export default class Post {
     };
   }
 
-  static async incVote(id) {
-    await this.collection().updateOne(
-      { _id: ObjectId(String(id)) },
-      { $inc: { vote: 1 } }
-    );
-  }
-
-  static async decVote(id) {
-    await this.collection().updateOne(
-      { _id: ObjectId(String(id)) },
-      { $: { vote: -1 } }
-    );
-  }
+  
 
   static async getPost(page, search) {
     const aggregate = [
