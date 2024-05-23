@@ -7,6 +7,8 @@ import Modal from "@/components/modal";
 
 const page = () => {
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
 
   useEffect(() => {
     (async () => {
@@ -31,12 +33,19 @@ const page = () => {
     })();
   }, []);
 
+  const totalPages = Math.ceil(data.length/itemsPerPage)
+
+  const currentData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+  
   return (
     <>
       <div>
         <div
           style={{ marginLeft: 300, width: 900 }}
-          className=" text-center    pb-5 bg-white pt-10  z-5 fixed   "
+          className=" text-center pb-5 bg-white pt-10  z-5 sticky top-10 "
         >
           <h1 className="font-bold text-4xl text-blue-950 mr-32">
             Pertanyaan paling populer
@@ -55,13 +64,11 @@ const page = () => {
           style={{ marginLeft: 460 }}
           className="  h-screen mt-3 pt-36 flex-col "
         >
-          {data?.map((item, index) => {
+          {currentData?.map((item, index) => {
+            
             return (
-              <>
-                <Link href={`/diskusi/${item.slug}`}>
-                  {" "}
+                <Link key={index} href={`/diskusi/${item.slug}`}>
                   <div
-                    key={index}
                     style={{ width: 600 }}
                     className="  bg-slate-100 border-b-4 border-slate-600 h-44 mt-10 px-5 pt-3 rounded-md hover:bg-slate-200  "
                   >
@@ -71,18 +78,29 @@ const page = () => {
                     <p className="mt-5 font-bold">
                       {item.answers.length} Comment
                     </p>
-                    <button className="bg-blue-100 px-2 py-1 rounded-md hover:bg-blue-200">
-                      <p className="font-light">{item.vote} ❤</p>
-                    </button>
+                 
                     <div className="flex gap-4  text-sm justify-end">
                       <p className="font-light">{item.user.name}</p>
                       <p className="font-light">{item.createdAt}</p>
                     </div>
                   </div>
                 </Link>
-              </>
+            
             );
           })}
+           <div className="flex justify-center mt-2 w-full">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={`px-3 py-1 mx-1 rounded ${
+                  currentPage === index + 1 ? "bg-blue-950 text-white" : "bg-gray-300"
+                }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       <Modal />

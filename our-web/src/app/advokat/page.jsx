@@ -2,8 +2,10 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const page = ({ item }) => {
+const Page = () => {
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8; // Sesuaikan jumlah item per halaman
 
   useEffect(() => {
     (async () => {
@@ -18,15 +20,25 @@ const page = ({ item }) => {
             },
           }
         );
-        const { data } = await res.json();
-        console.log(data);
-
-        setData(data);
+        const result = await res.json();
+        if (result.data) {
+          setData(result.data); // Pastikan `result.data` berisi seluruh data yang diterima dari backend
+        }
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  // Get current page data
+  const currentData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <>
       <div className="bg-white w-full py-5">
@@ -41,7 +53,7 @@ const page = ({ item }) => {
             <div>
               <input
                 style={{ width: 535 }}
-                className="h-10  px-3 outline outline-1 outline-blue-950 rounded-md"
+                className="h-10 px-3 outline outline-1 outline-blue-950 rounded-md"
                 type="text"
               />
             </div>
@@ -54,67 +66,73 @@ const page = ({ item }) => {
 
       <div className="w-full">
         {/* --------Card--------- */}
-
         <div className="w-full justify-center flex ">
-          <div className=" ">
-            {data.map((item, index) => {
-              return (
-                <>
-                  <Link href={`/advokat/${item._id}`}>
-                    <div key={index}>
-                      <div className="mt-5  gap-3  px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300 ">
-                        <div>
-                          <img
-                            className="w-24 rounded-md "
-                            src={item.imgUrl}
-                            alt=""
-                          />
-                        </div>
-
-                        <div>
-                          <p className="font-bold text-md">{item.name}</p>
-                          <div className="flex gap-4 mt-2 ">
-                            <p>{item.city}</p>I
-                            <p>Pengalaman {item.experience}</p>
-                          </div>
-                          <div className="flex gap-2 text-sm font-light mt-5">
-                            {item.category
-                              .split(", ", 3)
-                              .map((category, index) => {
-                                return (
-                                  <>
-                                    <div key={index}>
-                                      <p className=" bg-slate-300 px-2 py-1 rounded-sm">
-                                        {category}
-                                      </p>
-                                    </div>
-                                  </>
-                                );
-                              })}
-                          </div>
-                          <div className="mt-5 flex">
-                            <p className="font-bold">Pendidikan :</p>
-                            <p>{item.education}</p>
-                          </div>
-                        </div>
+          <div className="">
+            {currentData.map((item, index) => (
+              <Link href={`/advokat/${item._id}`} key={index}>
+                <div>
+                  <div className="mt-5 gap-3 px-6 py-6 bg-blue-100 rounded-t-md flex border-b-2 border-slate-300">
+                    <div>
+                      <img
+                        className="w-24 rounded-md"
+                        src={item.imgUrl}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <p className="font-bold text-md">{item.name}</p>
+                      <div className="flex gap-4 mt-2">
+                        <p>{item.city}</p>
+                        <p>Pengalaman {item.experience}</p>
                       </div>
-                      <div className=" bg-blue-100 w-full h-16 py-2 text-end px-4 rounded-b-md">
-                        <Link href={"/chats/" + item._id}>
-                          <button className="ml-2 bg-blue-800 rounded-md w-64  py-2 text-white px-4 hover:bg-blue-950  ">
-                            Konsultasikan
-                          </button>
-                        </Link>
+                      <div className="flex gap-2 text-sm font-light mt-5">
+                        {item.category
+                          .split(", ", 3)
+                          .map((category, index) => (
+                            <div key={index}>
+                              <p className="bg-slate-300 px-2 py-1 rounded-sm">
+                                {category}
+                              </p>
+                            </div>
+                          ))}
+                      </div>
+                      <div className="mt-5 flex">
+                        <p className="font-bold">Pendidikan :</p>
+                        <p>{item.education}</p>
                       </div>
                     </div>
-                  </Link>
-                </>
-              );
-            })}
+                  </div>
+                  <div className="bg-blue-100 w-full h-16 py-2 text-end px-4 rounded-b-md">
+                    <Link href={`/chats/${item._id}`}>
+                      <button className="ml-2 bg-blue-800 rounded-md w-64 py-2 text-white px-4 hover:bg-blue-950">
+                        Konsultasikan
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-10">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={`px-3 py-1 mx-1 rounded ${
+                currentPage === index + 1
+                  ? "bg-blue-950 text-white"
+                  : "bg-gray-300"
+              }`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </div>
     </>
   );
 };
 
-export default page;
+export default Page;
