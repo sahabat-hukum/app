@@ -9,8 +9,8 @@ export default class Answer {
   static async createAnswer(answerInput) {
     const { userId, postId, content } = answerInput;
     await this.collection().insertOne({
-      userId: ObjectId(String(userId)),
-      postId: ObjectId(String(postId)),
+      userId: new ObjectId(String(userId)),
+      postId: new ObjectId(String(postId)),
       content: content,
       createdAt: new Date(),
     });
