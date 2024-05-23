@@ -81,7 +81,7 @@ const page = () => {
                  
                     <div className="flex gap-4  text-sm justify-end">
                       <p className="font-light">{item.user.name}</p>
-                      <p className="font-light">{item.createdAt}</p>
+                      <p className="font-light">{item.createdAt.slice(0,10)}</p>
                     </div>
                   </div>
                 </Link>

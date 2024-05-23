@@ -44,11 +44,9 @@ const page = ({ params }) => {
               {data.title}
             </p>
             <p className="mt-5 font-bold">{data.answers?.length} Comment</p>
-
             <span className=""> {data.content}</span>
-
-            <span className="font-light">
-              <u>{data.user?.name}</u> <u> {data.createdAt}</u>{" "}
+            <span className="font-light text-[12px] ">
+              <u>{" " +  data.user?.name}</u> <u> {data?.createdAt?.slice(0,10)}</u>{" "}
             </span>
           </div>
           <Coment id={data._id} router={router} />
@@ -76,10 +74,7 @@ const page = ({ params }) => {
               );
             })}
           </div>
-        </div>    
-      
-      
-      
+        </div>             
     </>
   );
 };
