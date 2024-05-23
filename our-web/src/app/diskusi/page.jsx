@@ -70,7 +70,7 @@ const page = () => {
                 <Link key={index} href={`/diskusi/${item.slug}`}>
                   <div
                     style={{ width: 600 }}
-                    className="  bg-slate-100 border-b-4 border-slate-600 h-44 mt-10 px-5 pt-3 rounded-md hover:bg-slate-200 hover:scale-110 hover:duration-200  "
+                    className="  bg-slate-100 border-b-4 border-slate-600 h-44 mt-10 px-5 pt-3 rounded-md  "
                   >
                     <p className="bg-blue-50 inline-block px-2 py-1 rounded-sm font-bold text-slate-700">
                       {item.title}

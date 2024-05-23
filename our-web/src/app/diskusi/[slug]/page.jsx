@@ -9,6 +9,16 @@ const page = ({ params }) => {
   const [data, setData] = useState([]);
   const router = useRouter();
 
+  function Role({role}) {
+    if (role === "Advokat") {
+      return (
+        <p className="font-bold bg-blue-200 text-slate-800 px-3 py-2 inline-block rounded-sm">
+          advokat
+        </p>
+      );
+    }
+  }
+
   useEffect(() => {
     (async () => {
       try {
@@ -34,47 +44,50 @@ const page = ({ params }) => {
 
   return (
     <>
-   
-        <div className="flex flex-col items-center" >
-          <div
-            style={{ width: 1000 }}
-            className="  bg-slate-100 border-b-4 border-slate-600 h-64 mt-20 px-5 pt-3 rounded-md    "
-          >
-            <p className="bg-blue-50 inline-block px-2 py-1 rounded-sm font-bold text-slate-700">
-              {data.title}
-            </p>
-            <p className="mt-5 font-bold">{data.answers?.length} Comment</p>
-            <span className=""> {data.content}</span>
-            <span className="font-light text-[12px] ">
-              <u>{" " +  data.user?.name}</u> <u> {data?.createdAt?.slice(0,10)}</u>{" "}
-            </span>
-          </div>
-          <Coment id={data._id} router={router} />
+      <div className="flex flex-col items-center">
+        <div
+          style={{ width: 1000 }}
+          className="  bg-slate-100 border-b-4 border-slate-600 h-64 mt-20 px-5 pt-3 rounded-md    "
+        >
+          <p className="bg-blue-50 inline-block px-2 py-1 rounded-sm font-bold text-slate-700">
+            {data.title}
+          </p>
+          <p className="mt-5 font-bold">{data.answers?.length} Comment</p>
+          <span className=""> {data.content}</span>
+          <span className="font-light text-[12px] ">
+            <u>{" " + data.user?.name}</u>{" "}
+            <u> {data?.createdAt?.slice(0, 10)}</u>{" "}
+          </span>
+        </div>
+        <Coment id={data._id} router={router} />
 
-          <div style={{ width: 1000 }} className="">
-            <a href="#up">
-              <div className="mt-16 text-blue-950 text-xl font-bold">
-                Semua Komen
-              </div>
-            </a>
+        <div style={{ width: 1000 }} className="">
+          <a href="#up">
+            <div className="mt-16 text-blue-950 text-xl font-bold">
+              Semua Komen
+            </div>
+          </a>
 
-            {data.answers?.map((item, index) => {
-              return (
-                <>
-                  <div className="px-2 py-4 mt-5 rounded-sm bg-slate-200">
+          {data.answers?.map((item, index) => {
+            return (
+              <>
+                <div className="px-16 py-12 rounded-md mt-5  bg-slate-200">
+                  <div className="flex justify-between">
                     <p className="font-bold bg-blue-200 text-slate-800 px-3 py-2 inline-block rounded-sm">
                       {data?.answersUser[index]?.name}
-                      {/* {JSON.stringify(item)} */}
                     </p>
-                    <p className="mt-5" style={{ whiteSpace: "pre-line" }}>
-                      {item.content}
-                    </p>
+                    <Role role={data?.answersUser[index].role} />
                   </div>
-                </>
-              );
-            })}
-          </div>
-        </div>             
+
+                  <p className="mt-5" style={{ whiteSpace: "pre-line" }}>
+                    {item.content}
+                  </p>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 };

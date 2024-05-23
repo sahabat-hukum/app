@@ -152,7 +152,6 @@ export default class Post {
           "answers-user.education",
           "answers-user.about",
           "answers-user.identifier",
-          "answers-user.role",
         ],
       },
     ];

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import ErrorMessage from "@/components/errorMessage";
 
 const page = async () => { 
   "use server"
@@ -37,6 +38,7 @@ const page = async () => {
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
           <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
             <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
+            <ErrorMessage />
             <form
               action={handleLogin}
               className="bg-white shadow w-full rounded-lg divide-y divide-gray-200"
