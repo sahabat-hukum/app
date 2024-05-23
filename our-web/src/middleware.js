@@ -1,10 +1,9 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import { useRouter } from "next/navigation";
 
 export async function middleware(request) {
-  if (request.nextUrl.pathname.startsWith("/addQuestion")) {
+  if (request.nextUrl.pathname.startsWith("/add-question")) {
     const loginUrl = new URL('/login', request.url)
     // console.log("masuk middleware")
     const authorization = cookies().get("Authorization");
@@ -23,18 +22,12 @@ export async function middleware(request) {
   }
 
   if (request.nextUrl.pathname.startsWith("/chat-list")) {
+    const loginUrl = new URL('/login', request.url)
     // console.log("masuk middleware")
     const authorization = cookies().get("Authorization");
     // console.log(authorization, "<<<")
     if (!authorization) {
-      return NextResponse.json(
-        {
-          message: "Anda harus login dahulu",
-        },
-        {
-          status: "401",
-        }
-      );
+      return NextResponse.redirect(loginUrl);
     }
 
     const token = authorization.value.split(" ")[1];
@@ -45,19 +38,13 @@ export async function middleware(request) {
     }
   }
 
-  if (request.nextUrl.pathname.startsWith("/chat-list")) {
+  if (request.nextUrl.pathname.startsWith("/chats")) {
+    const loginUrl = new URL('/login', request.url)
     // console.log("masuk middleware")
     const authorization = cookies().get("Authorization");
     // console.log(authorization, "<<<")
     if (!authorization) {
-      return NextResponse.json(
-        {
-          message: "Anda harus login dahulu",
-        },
-        {
-          status: "401",
-        }
-      );
+      return NextResponse.redirect(loginUrl);
     }
 
     const token = authorization.value.split(" ")[1];

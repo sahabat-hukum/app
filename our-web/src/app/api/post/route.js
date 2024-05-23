@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import Post from "../../../../database/models/post";
 
-export async function GET() {
+export async function GET(req) {
+  const url = new URL(req.url)
+  const search = url.searchParams.get("search");
   try {
-    const data = await Post.getPost();
+    const data = await Post.getPost(search);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.log(error);
